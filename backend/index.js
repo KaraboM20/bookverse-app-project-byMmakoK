@@ -1,169 +1,151 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const dotenv = require('dotenv');
-
-dotenv.config();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const Book = require('./models/Book');
+const User = require('./models/User');
+const seedBooks = require('./seed');
+const userRoutes = require('./routes/users');
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
+app.use('/api/users', userRoutes);
 
-// MongoDB Connection
-mongoose.connect('mongodb://127.0.0.1:27017/bookverse')
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
 
-// Book Schema
-const bookSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  author: { type: String, required: true },
-  isbn: { type: String, required: true, unique: true },
-  genre: { type: String, required: true },
-  price: { type: Number, required: true },
-  stockQuantity: { type: Number, required: true },
-  image: { type: String } 
+// Run seeding after connection
+seedBooks();
+
+// Book Routes
+app.get('/api/books', async (req, res) => {
+  try {
+    const books = await Book.find();
+    res.json(books);
+  } catch (err) {
+    console.error('Error fetching books:', err);
+    res.status(500).json({ message: 'Failed to fetch books' });
+  }
 });
-const Book = mongoose.model('Book', bookSchema);
 
-// User Schema
-const userSchema = new mongoose.Schema({
-  username: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }],
-});
-const User = mongoose.model('User', userSchema);
-
-// Books Endpoints
 app.post('/api/books', async (req, res) => {
   try {
     const book = new Book(req.body);
     await book.save();
     res.status(201).json(book);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+  } catch (err) {
+    console.error('Error adding book:', err);
+    res.status(400).json({ message: 'Failed to add book' });
   }
 });
 
-app.get('/api/books', async (req, res) => {
+// User Routes
+app.post('/api/users/register', async (req, res) => {
   try {
-    const { title, author, genre } = req.query;
-    const query = {};
-    if (title) query.title = { $regex: title, $options: 'i' };
-    if (author) query.author = { $regex: author, $options: 'i' };
-    if (genre) query.genre = { $regex: genre, $options: 'i' };
-    const books = await Book.find(query);
-    res.json(books);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+    const { username, email, password } = req.body;
+    if (!username || !email || !password) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
 
-app.get('/api/books/:id', async (req, res) => {
-  try {
-    const book = await Book.findById(req.params.id);
-    if (!book) return res.status(404).json({ error: 'Book not found' });
-    res.json(book);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Email already registered' });
+    }
 
-app.put('/api/books/:id', async (req, res) => {
-  try {
-    const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!book) return res.status(404).json({ error: 'Book not found' });
-    res.json(book);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
-
-app.delete('/api/books/:id', async (req, res) => {
-  try {
-    const book = await Book.findByIdAndDelete(req.params.id);
-    if (!book) return res.status(404).json({ error: 'Book not found' });
-    res.json({ message: 'Book deleted' });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Users Endpoints
-app.post('/api/users', async (req, res) => {
-  try {
-    const user = new User(req.body);
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({ username, email, password: hashedPassword, wishlist: [] });
     await user.save();
-    res.status(201).json(user);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET || 'your_jwt_secret', { expiresIn: '1h' });
+    res.status(201).json({
+      message: 'Profile created successfully',
+      token,
+      user: { id: user._id, username, email },
+    });
+  } catch (err) {
+    console.error('Error registering user:', err);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
 app.get('/api/users/:id', async (req, res) => {
   try {
     const user = await User.findById(req.params.id).populate('wishlist');
-    if (!user) return res.status(404).json({ error: 'User not found' });
+    if (!user) return res.status(404).json({ message: 'User not found' });
     res.json(user);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    console.error('Error fetching user:', err);
+    res.status(500).json({ message: 'Failed to fetch user' });
   }
 });
 
 app.put('/api/users/:id', async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!user) return res.status(404).json({ error: 'User not found' });
+    const { username, email, password, wishlist } = req.body;
+    const updateData = { username, email, wishlist };
+    if (password) updateData.password = await bcrypt.hash(password, 10);
+    const user = await User.findByIdAndUpdate(req.params.id, updateData, { new: true });
+    if (!user) return res.status(404).json({ message: 'User not found' });
     res.json(user);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+  } catch (err) {
+    console.error('Error updating user:', err);
+    res.status(400).json({ message: 'Failed to update user' });
   }
 });
 
 app.delete('/api/users/:id', async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) return res.status(404).json({ error: 'User not found' });
+    if (!user) return res.status(404).json({ message: 'User not found' });
     res.json({ message: 'User deleted' });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    console.error('Error deleting user:', err);
+    res.status(500).json({ message: 'Failed to delete user' });
   }
 });
 
-// Wishlist Endpoints
-app.post('/api/users/:id/wishlist', async (req, res) => {
+app.put('/api/users/:id/wishlist', async (req, res) => {
   try {
+    const { bookId } = req.body;
     const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ error: 'User not found' });
-    const bookId = req.body.bookId;
-    if (!user.wishlist.includes(bookId)) {
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    // Check if bookId exists in wishlist
+    if (user.wishlist.some((id) => id?.toString() === bookId)) {
+      user.wishlist = user.wishlist.filter((id) => id?.toString() !== bookId);
+    } else {
       user.wishlist.push(bookId);
-      await user.save();
     }
-    res.json(user);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+
+    await user.save();
+    res.json(user.wishlist);
+  } catch (err) {
+    console.error('Error updating wishlist:', err);
+    res.status(400).json({ message: 'Failed to update wishlist' });
   }
 });
+
 
 app.delete('/api/users/:id/wishlist/:bookId', async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ error: 'User not found' });
-    user.wishlist = user.wishlist.filter((id) => id.toString() !== req.params.bookId);
-    await user.save();
-    res.json(user);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+    const { id, bookId } = req.params;
+    const user = await User.findById(id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+  
+    const index = user.wishlist.indexOf(bookId);
+    if (index > -1) {
+      user.wishlist.splice(index, 1);
+      await user.save();
+    }
+
+    res.json(user.wishlist);
+  } catch (err) {
+    console.error('Error deleting from wishlist:', err);
+    res.status(400).json({ message: 'Failed to delete from wishlist' });
   }
 });
 
-// Start **Server**
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`**Server** running on port ${PORT}`));

@@ -1,21 +1,15 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 
-const startServer = async () => {
-  try {
-    // Connect to MongoDB
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/bookverse');
-    console.log('MongoDB connected');
+// Load models
+require('./models/Book');
+require('./models/User');
 
-    // Load index.js to define models and endpoints
-    require('./index');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/bookverse', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => console.error('MongoDB connection error:', err));
 
-    // Require and run seeding after index.js
-    const seedBooks = require('./seed');
-    await seedBooks();
-  } catch (err) {
-    console.error('Startup error:', err);
-    process.exit(1);
-  }
-};
-
-startServer();
+require('./index');

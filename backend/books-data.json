@@ -9,15 +9,6 @@
       "image": "https://covers.openlibrary.org/b/isbn/9780743273565-L.jpg"
     },
     {
-      "title": "Dune",
-      "author": "Frank Herbert",
-      "isbn": "978-0441172719",
-      "genre": "Science Fiction",
-      "price": 179.99,
-      "stockQuantity": 30,
-      "image": "https://covers.openlibrary.org/b/isbn/9780441172719-L.jpg"
-    },
-    {
       "title": "Pride and Prejudice",
       "author": "Jane Austen",
       "isbn": "978-0141439518",
@@ -88,5 +79,14 @@
       "price": 130.49,
       "stockQuantity": 33,
       "image": "https://covers.openlibrary.org/b/isbn/9780804139021-L.jpg"
+    },
+    {
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "isbn": "978-0441172719",
+      "genre": "Science Fiction",
+      "price": 179.99,
+      "stockQuantity": 30,
+      "image": "https://covers.openlibrary.org/b/isbn/9780441172719-L.jpg"
     }
   ]
