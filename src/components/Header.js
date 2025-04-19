@@ -69,7 +69,7 @@ const Header = () => {
             </div>
           ) : (
             <NavLink to="/create-profile">
-              <MdAccountCircle /> Login
+              <MdAccountCircle /> SignIn
             </NavLink>
           )}
         </div>
