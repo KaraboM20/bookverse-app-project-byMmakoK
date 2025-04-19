@@ -1,0 +1,104 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    background-color: #e40de7;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  .logo img {
+    height: 80px;
+    border-radius: 10px;
+  }
+  
+  .search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 5px 10px;
+    background-color: #f9f9f9;
+    width: 250px;
+  }
+  
+  .search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 6px 10px;
+    font-size: 12px;
+    background-color: transparent;
+  }
+  
+  .search-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+  }
+
+  .logout-button {
+    color: #e40de7;
+    border: 1px solid #e40de7;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .logout-button:hover {
+    color: black;
+    background-color: #e40de7;
+    border: 1px solid black;
+  }
+
+  .search-button:hover {
+    color: #e40de7;
+  }
+  
+  
+  
+  .header-icons {
+    display: flex;
+  }
+
+  .add-newbook,
+  .wish-list,
+  .create-profile,
+  .home-icon {
+    margin-left: 10px;
+  }
+
+  .add-newbook a,
+  .wish-list a,
+  .create-profile a,
+  .home-icon a {
+    display: grid;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-size: 16px;
+  }
+  
+  .add-newbook a:hover,
+  .wish-list a:hover,
+  .create-profile a:hover
+  .home-icon a:hover {
+    color: white;
+  }
+  
+  
+  .add-newbook svg,
+  .wish-list svg,
+  .create-profile svg,
+  .home-icon svg {
+    margin-right: 10px;
+    font-size: 25px;
+  }
+
+  .user-menu {
+    display: grid;
+  }
+  

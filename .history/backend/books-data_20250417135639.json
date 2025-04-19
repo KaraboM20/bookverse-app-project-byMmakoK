@@ -1,0 +1,92 @@
+[
+    {
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "isbn": "978-0743273565",
+      "genre": "Fiction",
+      "price": 189.99,
+      "stockQuantity": 50,
+      "image": "https://covers.openlibrary.org/b/isbn/9780743273565-L.jpg"
+    },
+    {
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "isbn": "978-0441172719",
+      "genre": "Science Fiction",
+      "price": 179.99,
+      "stockQuantity": 30,
+      "image": "https://covers.openlibrary.org/b/isbn/9780441172719-L.jpg"
+    },
+    {
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "isbn": "978-0141439518",
+      "genre": "Romance",
+      "price": 169.99,
+      "stockQuantity": 40,
+      "image": "https://covers.openlibrary.org/b/isbn/9780141439518-L.jpg"
+    },
+    {
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "isbn": "978-0547928227",
+      "genre": "Fantasy",
+      "price": 249.99,
+      "stockQuantity": 25,
+      "image": "https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg"
+    },
+    {
+      "title": "Sapiens: A Brief History of Humankind",
+      "author": "Yuval Noah Harari",
+      "isbn": "978-0062316097",
+      "genre": "Non-Fiction",
+      "price": 189.99,
+      "stockQuantity": 20,
+      "image": "https://covers.openlibrary.org/b/isbn/9780062316097-L.jpg"
+    },
+    {
+      "title": "1984",
+      "author": "George Orwell",
+      "isbn": "978-0451524935",
+      "genre": "Dystopian Fiction",
+      "price": 199.99,
+      "stockQuantity": 45,
+      "image": "https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg"
+    },
+    {
+      "title": "The Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "isbn": "978-0316769488",
+      "genre": "Fiction",
+      "price": 209.49,
+      "stockQuantity": 35,
+      "image": "https://covers.openlibrary.org/b/isbn/9780316769488-L.jpg"
+    },
+    {
+      "title": "The Name of the Wind",
+      "author": "Patrick Rothfuss",
+      "isbn": "978-0756404741",
+      "genre": "Fantasy",
+      "price": 169.99,
+      "stockQuantity": 28,
+      "image": "https://covers.openlibrary.org/b/isbn/9780756404741-L.jpg"
+    },
+    {
+      "title": "Educated",
+      "author": "Tara Westover",
+      "isbn": "978-0399590504",
+      "genre": "Memoir",
+      "price": 259.99,
+      "stockQuantity": 22,
+      "image": "https://covers.openlibrary.org/b/isbn/9780399590504-L.jpg"
+    },
+    {
+      "title": "The Martian",
+      "author": "Andy Weir",
+      "isbn": "978-0804139021",
+      "genre": "Science Fiction",
+      "price": R13.49,
+      "stockQuantity": 33,
+      "image": "https://covers.openlibrary.org/b/isbn/9780804139021-L.jpg"
+    }
+  ]
