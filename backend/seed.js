@@ -5,6 +5,11 @@ const Book = require('./models/Book');
 
 const seedBooks = async () => {
   try {
+    if (mongoose.connection.readyState !== 1) {
+      console.error('MongoDB is not connected, skipping seeding');
+      return false;
+    }
+
     await Book.deleteMany({});
     console.log('Existing books cleared');
 
@@ -13,9 +18,10 @@ const seedBooks = async () => {
     const booksData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
     await Book.insertMany(booksData);
     console.log('Books seeded successfully');
+    return true;
   } catch (err) {
-    console.error('Error seeding books:', err);
-    throw err;
+    console.error('Error seeding books:', err.message);
+    return false; 
   }
 };
 
