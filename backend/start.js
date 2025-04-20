@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 require('./models/Book');
 require('./models/User');
 
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(process.env.MONGO_URI, {
   serverSelectionTimeoutMS: 30000, 
   socketTimeoutMS: 45000,
 })
