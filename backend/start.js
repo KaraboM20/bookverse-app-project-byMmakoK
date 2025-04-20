@@ -1,5 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
+const seedBooks = require('./seed');
 
 // Load models
 require('./models/Book');
