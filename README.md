@@ -12,7 +12,7 @@ The purpose of this project is to create a RESTful API that supports the main fe
 - Express.js  
 - MongoDB & Mongoose  
 - dotenv  
-- Postman (for testing)
+  
 
 ## 📁 Features
 
@@ -24,7 +24,7 @@ Books can be created, read, updated, and deleted. Each book includes a title, au
 
 ### 👤 User Management
 
-Users can be created, viewed, updated, and deleted. Each user includes a username, email, password (hashed), and a wishlist (an array of book IDs).
+Users can be created, viewed, updated, and deleted. Each user includes a username, email, password, and a wishlist (an array of book IDs).
 
 ---
 
