@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# BookVerse - Online Bookstore Backend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is the backend system for **BookVerse**, an online bookstore. The API is built using **Node.js**, **Express**, and **MongoDB**. It allows users to browse books, manage their profiles, and add books to their wishlist. It also provides admin-like functionality to add or remove books from the store.
 
-## Available Scripts
+## 📌 Project Purpose
 
-In the project directory, you can run:
+The purpose of this project is to create a RESTful API that supports the main features of an online bookstore. It handles books, users, and wishlists, with full CRUD operations.
 
-### `npm start`
+## ⚙️ Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Node.js  
+- Express.js  
+- MongoDB & Mongoose  
+- dotenv  
+  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📁 Features
 
-### `npm test`
+### 📚 Book Management
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Books can be created, read, updated, and deleted. Each book includes a title, author, ISBN, genre, price, and stock quantity.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 👤 User Management
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Users can be created, viewed, updated, and deleted. Each user includes a username, email, password, and a wishlist (an array of book IDs).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+### ❤️ Wishlist Management
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Users can manage their wishlist by adding or removing books they are interested in.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🔐 Asynchronous and Error Handling
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+All database operations are handled using `async/await`. Proper error messages are returned if something goes wrong (e.g., book not found, user does not exist).
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🧪 Testing with Postman
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Postman was used to test each feature. A collection of test cases was created for:
 
-### Code Splitting
+- Book operations  
+- User operations  
+- Wishlist management  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Each request was documented with example input and response.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📦 The Project Link: https://bookeverse-app-project-bykarabo.netlify.app/
