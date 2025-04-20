@@ -14,55 +14,23 @@ The purpose of this project is to create a RESTful API that supports the main fe
 - dotenv  
 - Postman (for testing)
 
-## 📁 Features and Endpoints
+## 📁 Features
 
 ### 📚 Book Management
 
-Books can be created, read, updated, and deleted. Each book includes:
-
-- `title`
-- `author`
-- `ISBN`
-- `genre`
-- `price`
-- `stock quantity`
-
-**Endpoints:**
-
-- `POST /api/books` - Add a new book  
-- `GET /api/books` - Get all books (or search by title, author, or genre)  
-- `GET /api/books/:id` - Get a book by ID  
-- `PUT /api/books/:id` - Update a book  
-- `DELETE /api/books/:id` - Delete a book
+Books can be created, read, updated, and deleted. Each book includes a title, author, ISBN, genre, price, and stock quantity.
 
 ---
 
 ### 👤 User Management
 
-Users can be created, viewed, updated, and deleted. Each user includes:
-
-- `username`
-- `email`
-- `password` 
-
-
-**Endpoints:**
-
-- `POST /api/users` - Create a new user  
-- `GET /api/users/:id` - Get user details  
-- `PUT /api/users/:id` - Update user details  
-- `DELETE /api/users/:id` - Delete a user
+Users can be created, viewed, updated, and deleted. Each user includes a username, email, password (hashed), and a wishlist (an array of book IDs).
 
 ---
 
 ### ❤️ Wishlist Management
 
-Users can manage their wishlist by adding or removing books.
-
-**Endpoints:**
-
-- `POST /api/users/:id/wishlist` - Add a book to wishlist  
-- `DELETE /api/users/:id/wishlist/:bookId` - Remove a book from wishlist
+Users can manage their wishlist by adding or removing books they are interested in.
 
 ---
 
@@ -74,16 +42,14 @@ All database operations are handled using `async/await`. Proper error messages a
 
 ## 🧪 Testing with Postman
 
-Postman was used to test each endpoint. A collection of test cases was created for:
+Postman was used to test each feature. A collection of test cases was created for:
 
-- Book CRUD operations  
-- User CRUD operations  
+- Book operations  
+- User operations  
 - Wishlist management  
 
-Each request is documented with example input and response.
+Each request was documented with example input and response.
 
 ---
 
-## 📦 Project Setup
-
-The project link:
+## 📦 The Project Link: https://bookeverse-app-project-bykarabo.netlify.app/
