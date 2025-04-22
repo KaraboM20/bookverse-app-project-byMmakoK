@@ -48,6 +48,11 @@ const Booklists = () => {
       await toggleWishlist(bookId);
       setSuccess(isInWishlist ? 'Removed from wishlist' : 'Added to wishlist');
       console.log(isInWishlist ? 'Removed from Wishlist:' : 'Added to Wishlist:', bookId);
+
+      setTimeout(() => {
+        setWishlistLoading((prev) => ({ ...prev, [bookId]: false }));
+      }, 1500); 
+  
       setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
       console.error('Toggle wishlist error in Booklists:', {
@@ -80,16 +85,17 @@ const Booklists = () => {
         {books.map((book) => (
           <div key={book._id} className="book-card">
             <div className="heart-container">
-              {wishlistLoading[book._id] ? (
-                <span className="loading-text">Loading...</span>
-              ) : (
-                <FaHeart
-                  className={`heart-icon ${wishlist.some((item) => item && item._id === book._id) ? 'wished' : 'not-wished'}`}
-                  onClick={() => handleToggleWishlist(book._id)}
-                  title={wishlist.some((item) => item && item._id === book._id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
-                />
-              )}
-            </div>
+  {wishlistLoading[book._id] ? (
+    <span className="heart-loading">Loading...</span>
+  ) : (
+    <FaHeart
+      className={`heart-icon ${wishlist.some((item) => item && item._id === book._id) ? 'wished' : 'not-wished'}`}
+      onClick={() => handleToggleWishlist(book._id)}
+      title={wishlist.some((item) => item && item._id === book._id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+    />
+  )}
+</div>
+
             <img
               src={book.image || 'https://via.placeholder.com/150'}
               alt={book.title}
