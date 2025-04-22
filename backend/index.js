@@ -69,6 +69,17 @@ app.post('/api/users/register', async (req, res) => {
   }
 });
 
+// Get all users
+app.get('/api/users', async (req, res) => {
+  try {
+    const users = await User.find().populate('wishlist');
+    res.json(users);
+  } catch (err) {
+    console.error('Error fetching users:', err);
+    res.status(500).json({ message: 'Failed to fetch users' });
+  }
+});
+
 app.get('/api/users/:id', async (req, res) => {
   try {
     const user = await User.findById(req.params.id).populate('wishlist');
