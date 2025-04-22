@@ -52,4 +52,4 @@ Each request was documented with example input and response.
 
 ---
 
-## 📦 The Project Link: https://bookeverse-app-project-bykarabo.netlify.app/
+## 📦 The Project Link: https://bookverse-project-by-mmakok.netlify.app/
