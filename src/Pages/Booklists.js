@@ -12,7 +12,7 @@ const Booklists = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [wishlistLoading, setWishlistLoading] = useState({});
+  const [ setWishlistLoading] = useState({});
 
   useEffect(() => {
     const getBooks = async () => {
