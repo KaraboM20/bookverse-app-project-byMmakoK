@@ -57,7 +57,7 @@ const Createprofilepage = () => {
     }
 
     try {
-      const API_URL = process.env.REACT_APP_API_URL || 'https://bookverse-app-project-bymmakok.onrender.com/api/users/register';
+      const API_URL = process.env.REACT_APP_API_URL || 'https://bookverse-app-project-bymmakok-1.onrender.com/api/users/register';
       console.log('Sending request to:', API_URL, 'with data:', formData);
       const response = await axios.post(API_URL, formData);
       console.log('Registration response:', response.data);

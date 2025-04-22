@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'https://bookverse-app-project-bymmakok.onrender.com/api/books';
-const USER_API_URL = 'https://bookverse-app-project-bymmakok.onrender.com/api/users';
+const API_URL = 'https://bookverse-app-project-bymmakok-1.onrender.com/api/books';
+const USER_API_URL = 'https://bookverse-app-project-bymmakok-1.onrender.com/api/users';
 
 // Get all books
 export const getAllBooks = async () => {
