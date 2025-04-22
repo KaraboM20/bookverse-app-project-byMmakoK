@@ -12,7 +12,7 @@ const Booklists = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [ setWishlistLoading] = useState({});
+  const [wishlistLoading, setWishlistLoading] = useState({});
 
   useEffect(() => {
     const getBooks = async () => {
@@ -80,11 +80,15 @@ const Booklists = () => {
         {books.map((book) => (
           <div key={book._id} className="book-card">
             <div className="heart-container">
-              <FaHeart
-                className={`heart-icon ${wishlist.some((item) => item && item._id === book._id) ? 'wished' : 'not-wished'}`}
-                onClick={() => handleToggleWishlist(book._id)}
-                title={wishlist.some((item) => item && item._id === book._id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
-              />
+              {wishlistLoading[book._id] ? (
+                <span className="loading-text">Loading...</span>
+              ) : (
+                <FaHeart
+                  className={`heart-icon ${wishlist.some((item) => item && item._id === book._id) ? 'wished' : 'not-wished'}`}
+                  onClick={() => handleToggleWishlist(book._id)}
+                  title={wishlist.some((item) => item && item._id === book._id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                />
+              )}
             </div>
             <img
               src={book.image || 'https://via.placeholder.com/150'}
