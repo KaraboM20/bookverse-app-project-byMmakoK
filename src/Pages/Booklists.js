@@ -12,6 +12,7 @@ const Booklists = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [wishlistLoading, setWishlistLoading] = useState({});
 
   useEffect(() => {
     const getBooks = async () => {
@@ -40,10 +41,13 @@ const Booklists = () => {
       return;
     }
     try {
+      setWishlistLoading((prev) => ({ ...prev, [bookId]: true }));
       setError(null);
       setSuccess(null);
-      const isAdded = await toggleWishlist(bookId);
-      console.log(isAdded ? 'Added to Wishlist:' : 'Removed from Wishlist:', bookId);
+      const isInWishlist = wishlist.some((item) => item && item._id === bookId);
+      await toggleWishlist(bookId);
+      setSuccess(isInWishlist ? 'Removed from wishlist' : 'Added to wishlist');
+      console.log(isInWishlist ? 'Removed from Wishlist:' : 'Added to Wishlist:', bookId);
       setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
       console.error('Toggle wishlist error in Booklists:', {

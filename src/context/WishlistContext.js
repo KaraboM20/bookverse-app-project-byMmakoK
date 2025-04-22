@@ -21,7 +21,7 @@ export const WishlistProvider = ({ children }) => {
     try {
       const token = localStorage.getItem('token');
       if (!token) throw new Error('No authentication token found. Please log in again.');
-      const API_URL = `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/users/${user.userId}`;
+      const API_URL = `${process.env.REACT_APP_API_URL || 'https://bookverse-app-project-bymmakok.onrender.com'}/api/users/${user.userId}`;
       console.log('Fetching wishlist:', API_URL);
       const response = await axios.get(API_URL, {
         headers: { Authorization: `Bearer ${token}` },
@@ -63,7 +63,7 @@ export const WishlistProvider = ({ children }) => {
     try {
       const token = localStorage.getItem('token');
       if (!token) throw new Error('No authentication token found. Please log in again.');
-      const API_URL = `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/users/${user.userId}/wishlist`;
+      const API_URL = `${process.env.REACT_APP_API_URL || 'https://bookverse-app-project-bymmakok.onrender.com'}/api/users/${user.userId}/wishlist`;
       console.log('Toggling wishlist:', { API_URL, bookId });
       const response = await axios.put(
         API_URL,
