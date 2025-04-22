@@ -80,7 +80,7 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
-app.get('/api/users/:_id', async (req, res) => {
+app.get('/api/users/:id', async (req, res) => {
   try {
     const user = await User.findById(req.params.id).populate('wishlist');
     if (!user) return res.status(404).json({ message: 'User not found' });
@@ -91,7 +91,7 @@ app.get('/api/users/:_id', async (req, res) => {
   }
 });
 
-app.put('/api/users/:_id', async (req, res) => {
+app.put('/api/users/:id', async (req, res) => {
   try {
     const { username, email, password, wishlist } = req.body;
     const updateData = { username, email, wishlist };
@@ -105,7 +105,7 @@ app.put('/api/users/:_id', async (req, res) => {
   }
 });
 
-app.delete('/api/users/:_id', async (req, res) => {
+app.delete('/api/users/:id', async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
     if (!user) return res.status(404).json({ message: 'User not found' });
@@ -116,7 +116,7 @@ app.delete('/api/users/:_id', async (req, res) => {
   }
 });
 
-app.put('/api/users/:_id/wishlist', async (req, res) => {
+app.put('/api/users/:id/wishlist', async (req, res) => {
   try {
     const { bookId } = req.body;
     const user = await User.findById(req.params.id);
@@ -138,7 +138,7 @@ app.put('/api/users/:_id/wishlist', async (req, res) => {
 });
 
 
-app.delete('/api/users/:_id/wishlist/:bookId', async (req, res) => {
+app.delete('/api/users/:id/wishlist/:bookId', async (req, res) => {
   try {
     const { id, bookId } = req.params;
     const user = await User.findById(id);
